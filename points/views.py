@@ -2,7 +2,7 @@ from django.shortcuts import render
 import pandas as pd
 import os
 import json
-
+from django.http import JsonResponse
 
 def data_calc(customer_list, score_list, weight_list):
     if customer_list is None:
@@ -74,7 +74,7 @@ json_arr = json.dumps(res_arr)
 
 def dataPost(request):
     res_relist = res_list.values()
-    return render(request, 'index.html', {"data": json_arr})
+    return JsonResponse({"test": 1, "another_test": 2})
 
 
 def reg(value, request):

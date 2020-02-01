@@ -3,23 +3,45 @@ var express		= require("express"),
 
 var bodyParser = require('body-parser');
 var jsonParser = bodyParser.json();
+const fetch = require("node-fetch");
 
 const normalizePort = require('normalize-port');
 var port = normalizePort(process.env.PORT || '3000');
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
+var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + "/public"));
 
 var score = 100;
 const users = ["leo","khan","cindy","kevin","hamza"];
+var points ={};
 
-// fetch('127.002.10')
-// .then((response)=>{
-//     return response.json();
-// })
-// .then();
+fetch('http://127.0.0.1:8000/points')
+  .then((response) => {
+      console.log(response);
+    return response.json();
+  })
+  .then((myJson) => {
+    console.log(myJson);
+  }).catch((err)=>console.log(err));
+
+// var request = new XMLHttpRequest()
+//
+// request.open('GET', 'https://ghibliapi.herokuapp.com/films', true)
+// request.onload = function(response) {
+//   // Begin accessing JSON data here
+//   var data = JSON.parse(response)
+//
+//   if (request.status >= 200 && request.status < 400) {
+//     console.log(data);
+//   } else {
+//     console.log('error')
+//   }
+// }
+
+// request.send()
 
 app.get("/",(req,res)=>{
 	res.render("landing");
