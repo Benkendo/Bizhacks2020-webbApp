@@ -16,15 +16,15 @@ app.use(express.static(__dirname + "/public"));
 
 var score = 100;
 const users = ["leo","khan","cindy","kevin","hamza"];
-var points ={};
+var points;
 
 fetch('http://127.0.0.1:8000/points')
   .then((response) => {
-      console.log(response);
+
     return response.json();
   })
   .then((myJson) => {
-    console.log(myJson);
+      points = myJson;
   }).catch((err)=>console.log(err));
 
 // var request = new XMLHttpRequest()
@@ -40,7 +40,6 @@ fetch('http://127.0.0.1:8000/points')
 //     console.log('error')
 //   }
 // }
-
 // request.send()
 
 app.get("/",(req,res)=>{
@@ -61,16 +60,14 @@ app.get("/register",(req,res)=>{
 
 app.post("/login",urlencodedParser,(req,res)=>{
     var searchname = req.body.username;
-
         function findIndex(searchname){
             for(var i=0; i<users.length; i++){
                 if(searchname == users[i]){
-                    return i;
+                    return i+1;
                 }
             }
             return null;
         }
-
         function finduser(searchname){
             var searched = 0;
             for(var i=0; i<users.length; i++){
@@ -80,18 +77,18 @@ app.post("/login",urlencodedParser,(req,res)=>{
             }
             return searched;
         }
-        async function search(searchname){
+        async function search(searchname, points){
             const searched = await finduser(searchname);
-                var userIndex = findIndex(searchname);
+                var userIndex = await findIndex(searchname);
+                var score = points[userIndex];
                 if(searched == 1){
-                    res.render("index",{userIndex:userIndex});
+                    res.render("index",{score:score});
                 }
                 else{
                     res.redirect("login");
                 }
         }
-        console.log(findIndex(searchname));
-        search(searchname);
+        search(searchname, points);
 });
 
 app.get("/myrewards",(req,res)=>{

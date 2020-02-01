@@ -61,20 +61,23 @@ def calc():
 id = 2
 
 res_list = calc()
-res_arr = []
+res_arr = {}
 for i in range(1, len(res_list)):
-    res_arr.append(res_list[i])
-res_str = ''
-for i in range(0, len(res_arr)):
-    if res_arr[i][0] == str(id):
-        res_str = res_arr[i][1]
+    res_arr[res_list[i][0]] = res_list[i][1]
 
-json_arr = json.dumps(res_arr)
+# print(res_arr)
+
+# res_str = ''
+# for i in range(0, len(res_arr)):
+#     if res_arr[i][0] == str(id):
+#         res_str = res_arr[i][1]
+
+##json_arr = json.dumps(res_arr)
 
 
 def dataPost(request):
     res_relist = res_list.values()
-    return JsonResponse({"test": 1, "another_test": 2})
+    return JsonResponse(res_arr)
 
 
 def reg(value, request):
