@@ -1,0 +1,24 @@
+{
+  "name": "bizhack2020",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/khan123451/bizhack2020.git"
+  },
+  "author": "Leo Wei",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/khan123451/bizhack2020/issues"
+  },
+  "homepage": "https://github.com/khan123451/bizhack2020#readme",
+  "dependencies": {
+    "ejs": "^3.0.1",
+    "express": "^4.17.1",
+    "normalize-port": "^1.0.0"
+  }
+}
